@@ -1,5 +1,3 @@
 rw_venv/
-write_philosophers.py
-philosophers.txt
-read_philosophers.py
-append_philosophers.py
+*phil*
+read*
