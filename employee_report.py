@@ -7,16 +7,48 @@
 ## 20s, 30s and 40s. Reproduce the report as show below (print statements).
 
 import csv
+
+ages = {'20s': [], '30s': [], '40s': []} #Establishes list for age
+categories = {'Highly Efficient': [], 'Inefficient': []} # Establishes list for efficiency categories
+
 employee = open('employee_data.csv','r')
 csv_file = csv.reader(employee)
 next(csv_file) #skips header and starts on the next line
+
 for rec in csv_file:    #This brings each record into a list format 
-    prod = int(rec [6])
-    hrs = int(rec [5])
+    name = rec[1]
+    age = int(rec[2])
+    prod = int(rec[5])
+    hrs = int(rec[4])
     efficiency = (prod / hrs)
+
+#efficiency calculations     
     if efficiency >= 2:
-        eff_rate = "Highly Efficient"
+        categories['Highly Efficient'].append(name)
     elif efficiency <= 1:
-        eff_rate = "Inefficient"
-    print(f"Name:   {rec[1]}")
-    input()
+        categories['Inefficient'].append(name)
+
+#age calculation
+    if 20 <= age < 30:
+            ages['20s'].append(name)
+    elif 30 <= age < 40:
+            ages['30s'].append(name)
+    elif 40 <= age < 50:
+            ages['40s'].append(name)
+
+    #print(f"Name:   {rec[0]}")
+    #input()
+print("Efficiency Categories:")
+for category, names in categories.items():
+    print(f"\nEmployees who are {category}:")
+    for name in names:
+        print(f"{name}")
+
+
+
+print("\nAge Groups:")
+for group, names in ages.items():
+    print(f"\nEmployees in their {group}:")
+    for name in names:
+        print(f"{name}")
+    print(f"Total number of employees in their {group}: {len(names)}")
